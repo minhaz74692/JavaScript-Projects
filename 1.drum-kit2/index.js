@@ -1,6 +1,6 @@
 
 
-function playSound(property){
+function playSound(property) {
     switch (property) {
         case "w":
             let audioA = new Audio("sounds/tom-1.mp3");
@@ -32,33 +32,45 @@ function playSound(property){
         default:
     };
 }
+function buttonAnimation(currentKey) {
+    let activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    activeButton.classList.add("animate");
+    setTimeout(() => {
+        activeButton.classList.remove("pressed");
+        activeButton.classList.remove("animate");
+    }, 500);
+    console.log();
+}
 //buttonclick event
 let drumNo = document.querySelectorAll(".drum").length;
 for (let i = 0; i < drumNo; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("mousedown", function () {
         let buttonInnerHtml = this.innerHTML;
         playSound(buttonInnerHtml);
-        this.style.color = "white";
+        buttonAnimation(buttonInnerHtml);
+        // this.style.color = "white";
     })
-    document.querySelectorAll(".drum")[i].addEventListener("mouseenter", function () {
-        this.style.color = "red";
-        this.classList.add("animDrum");
-    })
-    document.querySelectorAll(".drum")[i].addEventListener("mouseout", function () {
-        this.style.color = "#DA0463";
-        this.classList.remove("animDrum");
-    })
+    // document.querySelectorAll(".drum")[i].addEventListener("mouseenter", function () {
+    //     this.style.color = "red";
+    //     this.classList.add("animDrum");
+    // })
+    // document.querySelectorAll(".drum")[i].addEventListener("mouseout", function () {
+    //     this.style.color = "#DA0463";
+    //     this.classList.remove("animDrum");
+    // })
 };
 
 
 //Keypress and keyup event
-document.addEventListener("keypress", function (e){
+document.addEventListener("keypress", function (e) {
     playSound(e.key);
-    document.querySelector(`.${e.key}`).style.color = "white";
-    document.querySelector(`.${e.key}`).classList.add("animDrum");
+    buttonAnimation(e.key);
+    // document.querySelector(`.${e.key}`).style.color = "white";
+    // document.querySelector(`.${e.key}`).classList.add("animDrum");
 
 })
-document.addEventListener("keyup", function (e){
-    document.querySelector(`.${e.key}`).style.color = "#DA0463";
-    document.querySelector(`.${e.key}`).classList.remove("animDrum");
-})
+// document.addEventListener("keyup", function (e){
+//     document.querySelector(`.${e.key}`).style.color = "#DA0463";
+//     document.querySelector(`.${e.key}`).classList.remove("animDrum");
+// })
